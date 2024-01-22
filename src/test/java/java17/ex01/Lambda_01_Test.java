@@ -1,5 +1,6 @@
 package java17.ex01;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 import java17.data.Data;
@@ -38,9 +39,9 @@ public class Lambda_01_Test {
     public void test_filter_by_age() throws Exception {
 
         List<Person> personList = Data.buildPersonList(100);
-
+        
         // TODO result ne doit contenir que des personnes adultes (age >= 18)
-        List<Person> result = filter(personList, null);
+        List<Person> result = filter(personList, pers -> pers.getAge() >= 18);
 
         assert result.size() == 83;
 
@@ -57,7 +58,7 @@ public class Lambda_01_Test {
         List<Person> personList = Data.buildPersonList(100);
 
         // TODO result ne doit contenir que des personnes dont le prénom est "first_10"
-        List<Person> result = filter(personList, null);
+        List<Person> result = filter(personList,  pers -> pers.getFirstname().equals("first_10"));
 
         assert result.size() == 1;
         assert result.get(0).getFirstname().equals("first_10");
@@ -75,7 +76,9 @@ public class Lambda_01_Test {
 
         // TODO result ne doit contenir que les personnes dont l'age est > 49 et dont le hash du mot de passe correspond à la valeur de la variable passwordSha512Hex
         // TODO Pour obtenir le hash d'un mot, utiliser la méthode DigestUtils.sha512Hex(mot)
-        List<Person> result = filter(personList, null);
+        List<Person> result = filter(personList, pers -> {
+            return pers.getAge() > 49 && passwordSha512Hex.equals(DigestUtils.sha512Hex(pers.getPassword()));
+        });
 
         assert result.size() == 6;
         for (Person person : result) {
