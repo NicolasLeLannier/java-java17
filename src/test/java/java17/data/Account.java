@@ -9,7 +9,24 @@ public class Account {
         return owner;
     }
 
-    public void setOwner(Person owner) {
+    /** Constructor
+	 * @param owner
+	 * @param balance
+	 */
+	public Account(Person owner, Integer balance) {
+		super();
+		this.owner = owner;
+		this.balance = balance;
+	}
+
+	/** Constructor
+	 * 
+	 */
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setOwner(Person owner) {
         this.owner = owner;
     }
 
